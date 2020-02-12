@@ -1,0 +1,47 @@
+plugins {
+  id "java"
+  id "scala"
+}
+
+group "citi.ocean.rio"
+version "1.0-SNAPSHOT"
+
+sourceCompatibility = 1.8
+
+repositories {
+  mavenLocal()
+  maven {
+    url "http://maven.aliyun.com/nexus/content/groups/public/"
+  }
+  maven {
+    url "http://maven.aliyun.com/nexus/content/repositories/jcenter"
+  }
+  mavenCentral()
+}
+
+dependencies {
+  compile "com.thoughtworks.paranamer:paranamer:2.8"
+  compile "org.apache.spark:spark-core_${scala_version}:${spark_version}"
+  compile "org.apache.spark:spark-streaming_${scala_version}:${spark_version}"
+  compile "org.apache.spark:spark-sql_${scala_version}:${spark_version}"
+  compile "org.apache.spark:spark-hive_${scala_version}:${spark_version}"
+//  compile "org.apache.spark:spark-mllib_${scala_version}:${spark_version}"
+
+  testCompile "org.mockito:mockito-core:$mockitocoreVersion"
+  testCompile "org.assertj:assertj-core:$assertjVersion"
+  testCompile "junit:junit:$junitVersion"
+}
+
+
+sourceSets {
+  main {
+    java {
+      srcDirs = ['src/main/java']
+      outputDir = file("$buildDir/classes/java/main")
+    }
+    scala {
+      srcDirs = ['src/main/scala', 'src/main/java']
+      outputDir = file("$buildDir/classes/scala/main")
+    }
+  }
+}
