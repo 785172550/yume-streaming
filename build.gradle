@@ -25,6 +25,10 @@ dependencies {
   compile "org.apache.spark:spark-streaming_${scala_version}:${spark_version}"
   compile "org.apache.spark:spark-sql_${scala_version}:${spark_version}"
   compile "org.apache.spark:spark-hive_${scala_version}:${spark_version}"
+  compile "org.apache.spark:spark-streaming-kafka-0-10_${scala_version}:${spark_version}"
+
+  compile 'org.apache.commons:commons-lang3:3.5'
+  
 //  compile "org.apache.spark:spark-mllib_${scala_version}:${spark_version}"
 
   testCompile "org.mockito:mockito-core:$mockitocoreVersion"
