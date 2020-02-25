@@ -6,7 +6,7 @@ import org.apache.spark.streaming.dstream.DStream
 import org.apache.spark.streaming.kafka010.ConsumerStrategies.Subscribe
 import org.apache.spark.streaming.kafka010.KafkaUtils
 import org.apache.spark.streaming.kafka010.LocationStrategies.PreferConsistent
-import org.apache.spark.streaming.{Durations, StreamingContext}
+import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 object YumeApp {
   def main(args: Array[String]): Unit = {
@@ -25,8 +25,8 @@ object YumeApp {
     // hdp-01:9092,hdp-02:9092,hdp-03::9092 RIO_TEST streamtopic 1
     val Array(kafkaAddress, group, topics, threadNum) = args
 
-    // interval 60s
-    val ssc = new StreamingContext(context, Durations.seconds(60))
+    // interval 10s
+    val ssc = new StreamingContext(context, Seconds(10))
     val topicArray = topics.split(",")
 
     // config kafka
@@ -48,8 +48,16 @@ object YumeApp {
       Subscribe[String, String](topicArray, kafkaParams)
     )
 
+
     // get value
     val Dstrem: DStream[String] = stream.map(_.value)
+
+//    Dstrem.window()
+//    Dstrem.transform()
+
+//    Dstrem.map(msg => {
+//      msg.
+//    })
 
     Runtime.getRuntime.addShutdownHook {
       new Thread() { () =>
