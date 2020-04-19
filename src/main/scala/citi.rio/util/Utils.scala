@@ -4,7 +4,7 @@ import org.apache.spark.sql.SparkSession
 import org.apache.spark.{SparkConf, SparkContext}
 
 object Utils {
-  def   getSession(name: String): SparkSession = {
+  def getSession(name: String): SparkSession = {
     val spark = SparkSession.builder()
       .appName(name)
       .master("local[*]")
